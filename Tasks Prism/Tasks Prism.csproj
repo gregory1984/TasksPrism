@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B7D00D8-B3F3-4DD4-9C10-83B593E298EB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tasks_Prism</RootNamespace>
+    <AssemblyName>Tasks Prism</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\Exec\Exec.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Tasks Crypto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Tasks Crypto\bin\Debug\Tasks Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Tasks Model">
+      <HintPath>..\Tasks Model\bin\Debug\Tasks Model.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converters\MutlipassConverter.cs" />
+    <Compile Include="Events\CloseAdministrationWindowEvent.cs" />
+    <Compile Include="Events\Payloads\ShowTaskCreationWindowPayload.cs" />
+    <Compile Include="Events\Payloads\TaskCommentsCollectedPayload.cs" />
+    <Compile Include="Events\Payloads\TaskDatesCollectedPayload.cs" />
+    <Compile Include="Events\Payloads\TaskParticipantsCollectedPayload.cs" />
+    <Compile Include="Events\Payloads\TaskPropertiesCollectedPayload.cs" />
+    <Compile Include="Events\RefreshTasksGridEvent.cs" />
+    <Compile Include="Events\RemoveSelectedTaskEvent.cs" />
+    <Compile Include="Events\ShowTaskCreationWindowEvent.cs" />
+    <Compile Include="Events\Payloads\TaskContentCollectedPayload.cs" />
+    <Compile Include="Events\TaskCreation\TaskAddedModifiedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskCommentsCollectedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskContentCollectedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskDatesCollectedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskDataRequestEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskParticipantsCollectedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskPropertiesCollectedEvent.cs" />
+    <Compile Include="Events\TaskCreation\TaskStatusSelectedEvent.cs" />
+    <Compile Include="Events\TaskSearching\ResetTaskFiltersEvent.cs" />
+    <Compile Include="Events\TaskSearching\UseTaskFiltersEvent.cs" />
+    <Compile Include="Events\LogoutEvent.cs" />
+    <Compile Include="Events\Pagination\JumpToPageEvent.cs" />
+    <Compile Include="Events\Payloads\UseTaskFiltersPayload.cs" />
+    <Compile Include="Events\PreferencesSavedEvent.cs" />
+    <Compile Include="Events\ClosePreferencesWindowEvent.cs" />
+    <Compile Include="Events\QuitApplicationEvent.cs" />
+    <Compile Include="Events\ShowAboutWindowEvent.cs" />
+    <Compile Include="Events\ShowAdministrationWindowEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowInstallationsEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowMyTasksEvent.cs" />
+    <Compile Include="Events\ShowPreferencesWindowEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowTasksEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowTasksWithMyActivityEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowTonersEvent.cs" />
+    <Compile Include="Events\TaskSearching\ShowUpdatesEvent.cs" />
+    <Compile Include="ViewModels\About\AboutWindowViewModel.cs" />
+    <Compile Include="ViewModels\Administration\AdministrationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Helpers\PermissionViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Helpers\UserRoleViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Helpers\UserStatusViewModel.cs" />
+    <Compile Include="ViewModels\ComboBox\ComboBoxViewModel.cs" />
+    <Compile Include="ViewModels\ComboBox\ComboBoxGenericViewModel.cs" />
+    <Compile Include="ViewModels\ComboBox\ComboBoxYesNoViewModel.cs" />
+    <Compile Include="ViewModels\Main\MainWindowFiltersViewModel.cs" />
+    <Compile Include="ViewModels\Main\Helpers\TaskCommentPrimaryDataViewModel.cs" />
+    <Compile Include="ViewModels\Main\Helpers\TaskPrimaryDataViewModel.cs" />
+    <Compile Include="ViewModels\Main\MainWindowTasksGridViewModel.cs" />
+    <Compile Include="ViewModels\Main\MainWindowToolBarViewModel.cs" />
+    <Compile Include="ViewModels\Main\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Pagination\PaginationViewModel.cs" />
+    <Compile Include="ViewModels\Preferences\PasswordChangingFormViewModel.cs" />
+    <Compile Include="ViewModels\Preferences\PreferencesFormViewModel.cs" />
+    <Compile Include="ViewModels\Preferences\PreferencesWindowViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Users\UsersAddingFormViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Users\UsersModifyingFormViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Users\UsersDeletingFormViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Roles\RolesAddingFormViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Roles\RolesDeletingFormViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Roles\RolesModifyingFormViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBar\ProgressBarViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Controls\TaskCommentsViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Controls\TaskParticipantsViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Controls\TaskPropertiesViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Controls\TaskContentViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Controls\TaskDatesViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\Helpers\TaskParticipantViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskCreationWindowViewModel.cs" />
+    <Compile Include="Views\About\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\AdministrationWindow.xaml.cs">
+      <DependentUpon>AdministrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\RolesForm.xaml.cs">
+      <DependentUpon>RolesForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Roles\RolesAddingForm.xaml.cs">
+      <DependentUpon>RolesAddingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Roles\RolesDeletingForm.xaml.cs">
+      <DependentUpon>RolesDeletingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Roles\RolesModifyingForm.xaml.cs">
+      <DependentUpon>RolesModifyingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\UsersForm.xaml.cs">
+      <DependentUpon>UsersForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Users\UsersAddingForm.xaml.cs">
+      <DependentUpon>UsersAddingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Users\UsersModifyingForm.xaml.cs">
+      <DependentUpon>UsersModifyingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Users\UsersDeletingForm.xaml.cs">
+      <DependentUpon>UsersDeletingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainWindowFilters.xaml.cs">
+      <DependentUpon>MainWindowFilters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainWindowTasksGrid.xaml.cs">
+      <DependentUpon>MainWindowTasksGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainWindowToolBar.xaml.cs">
+      <DependentUpon>MainWindowToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Preferences\PasswordChangingForm.xaml.cs">
+      <DependentUpon>PasswordChangingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Preferences\PreferencesForm.xaml.cs">
+      <DependentUpon>PreferencesForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Preferences\PreferencesWindow.xaml.cs">
+      <DependentUpon>PreferencesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Controls\TaskComments.xaml.cs">
+      <DependentUpon>TaskComments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Controls\TaskContent.xaml.cs">
+      <DependentUpon>TaskContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Controls\TaskDates.xaml.cs">
+      <DependentUpon>TaskDates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Controls\TaskParticipants.xaml.cs">
+      <DependentUpon>TaskParticipants.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Controls\TaskProperties.xaml.cs">
+      <DependentUpon>TaskProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\TaskCreationWindow.xaml.cs">
+      <DependentUpon>TaskCreationWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\About\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\AdministrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\RolesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Roles\RolesAddingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Roles\RolesDeletingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Roles\RolesModifyingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\UsersForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Users\UsersAddingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Users\UsersModifyingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Users\UsersDeletingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Events\ExceptionOccuredEvent.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Credentials.cs" />
+    <Compile Include="Helpers\CredentialsSerializer.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\MessageBoxes.cs" />
+    <Compile Include="Helpers\Permission.cs" />
+    <Compile Include="Helpers\UnityNames.cs" />
+    <Compile Include="Helpers\VersionData.cs" />
+    <Compile Include="Images\Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Login\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Views\Login\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\MainWindowFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\MainWindowTasksGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\MainWindowToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Preferences\PasswordChangingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Preferences\PreferencesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Preferences\PreferencesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Controls\TaskComments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Controls\TaskContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Controls\TaskDates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Controls\TaskParticipants.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Controls\TaskProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Images\Images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro">
+      <Version>1.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro.IconPacks">
+      <Version>1.9.1</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Unity" Version="6.3.0" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Exec\Exec.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo\USK_Logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

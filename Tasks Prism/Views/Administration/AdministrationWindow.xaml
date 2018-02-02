@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow
+    x:Class="Tasks_Prism.Views.Administration.AdministrationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:administration="clr-namespace:Tasks_Prism.Views.Administration"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding WindowTitle}"
+    Width="700"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ResizeMode="NoResize"
+    ShowIconOnTitleBar="False"
+    SizeToContent="Height"
+    WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--
+        Main grid
+    -->
+    <Grid>
+        <TabControl Controls:TabControlHelper.Underlined="TabPanel">
+            <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Użytkownicy">
+                <ContentControl>
+                    <administration:UsersForm />
+                </ContentControl>
+            </TabItem>
+            <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Role">
+                <ContentControl>
+                    <administration:RolesForm />
+                </ContentControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>

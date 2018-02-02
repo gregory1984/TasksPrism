@@ -1,0 +1,152 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Administration.Roles.RolesModifyingForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel>
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="Brak uprawnień"
+            FontFamily="Segoe UI"
+            FontSize="24"
+            Foreground="Red"
+            Visibility="{Binding WarningVisibility, UpdateSourceTrigger=PropertyChanged}" />
+        <GroupBox Header="Modyfikowanie roli" Visibility="{Binding FormVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <StackPanel>
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Rola:" />
+                <ComboBox
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    ItemsSource="{Binding Roles, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedRole, UpdateSourceTrigger=PropertyChanged}" />
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Nowa nazwa roli:" />
+                <TextBox
+                    Margin="2"
+                    Controls:TextBoxHelper.ClearTextButton="True"
+                    Controls:TextBoxHelper.SelectAllOnFocus="True"
+                    Controls:TextBoxHelper.UseFloatingWatermark="True"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding Rolename, UpdateSourceTrigger=PropertyChanged}" />
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Uprawnienia:" />
+                <DataGrid
+                    Height="300"
+                    Margin="2"
+                    AlternatingRowBackground="WhiteSmoke"
+                    AutoGenerateColumns="False"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding Permissions, UpdateSourceTrigger=PropertyChanged}"
+                    RowBackground="White"
+                    ScrollViewer.CanContentScroll="False"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    SelectedItem="{Binding SelectedPermission, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Single">
+                    <!--
+                        Selected row style
+                    -->
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <!--
+                        Columns
+                    -->
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn
+                            Width="auto"
+                            Header="Wybierz"
+                            SortMemberPath="IsChecked">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox
+                                        Margin="2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="*"
+                            Header="Uprawnienie"
+                            SortMemberPath="Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label
+                                        Margin="2"
+                                        VerticalAlignment="Center"
+                                        Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </GroupBox>
+        <!--
+            Buttons
+        -->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="3"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Command="{Binding ModifyRole}"
+                Visibility="{Binding ModifyRoleButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Check" />
+                    <Label VerticalAlignment="Center" Content="ZMIEŃ" />
+                </StackPanel>
+            </Button>
+            <Button Margin="2" Command="{Binding Close}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Close" />
+                    <Label VerticalAlignment="Center" Content="ZAMKNIJ" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

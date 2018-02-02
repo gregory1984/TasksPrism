@@ -1,0 +1,80 @@
+﻿<Controls:MetroWindow
+    x:Class="Tasks_Prism.Views.Main.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:main="clr-namespace:Tasks_Prism.Views.Main"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding WindowTitle}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ShowIconOnTitleBar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--
+        Main grid
+    -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--
+            Authenticated user
+        -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <Label
+                Margin="2"
+                VerticalAlignment="Center"
+                Content="Zalogowany użytkownik: "
+                FontFamily="Segoe UI"
+                FontWeight="Bold" />
+            <Label
+                Margin="2"
+                VerticalAlignment="Center"
+                Content="{Binding AuthenticatedUser}"
+                FontFamily="Segoe UI" />
+        </StackPanel>
+        <!--
+            ToolBar
+        -->
+        <ContentControl Grid.Row="1" Grid.Column="0">
+            <main:MainWindowToolBar />
+        </ContentControl>
+        <!--
+            Filters
+        -->
+        <ContentControl
+            Grid.Row="2"
+            Grid.Column="0"
+            Visibility="{Binding TasksVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <main:MainWindowFilters />
+        </ContentControl>
+        <!--
+            Tasks grid
+        -->
+        <ContentControl
+            Grid.Row="3"
+            Grid.Column="0"
+            Visibility="{Binding TasksVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <main:MainWindowTasksGrid />
+        </ContentControl>
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Administration.RolesForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:roles="clr-namespace:Tasks_Prism.Views.Administration.Roles"
+    Margin="-2"
+    prism:ViewModelLocator.AutoWireViewModel="False"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <TabControl Controls:TabControlHelper.Underlined="TabPanel">
+        <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Dodaj">
+            <ContentControl>
+                <roles:RolesAddingForm />
+            </ContentControl>
+        </TabItem>
+        <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Zmodyfikuj">
+            <ContentControl>
+                <roles:RolesModifyingForm />
+            </ContentControl>
+        </TabItem>
+        <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Usuń">
+            <ContentControl>
+                <roles:RolesDeletingForm />
+            </ContentControl>
+        </TabItem>
+    </TabControl>
+</UserControl>

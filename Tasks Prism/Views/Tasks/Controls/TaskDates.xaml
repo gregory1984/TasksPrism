@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Tasks.Controls.TaskDates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <GroupBox Header="Daty">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Data rozpoczęcia:" />
+                <DatePicker
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Controls:TextBoxHelper.Watermark="Wybierz datę"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Data zakończenia:" />
+                <DatePicker
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Controls:TextBoxHelper.Watermark="Wybierz datę"
+                    IsEnabled="{Binding IsEndPeriodEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Godzina rozpoczęcia:" />
+                <Controls:TimePicker
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Controls:TextBoxHelper.Watermark="Wybierz godzinę"
+                    Culture="pl-PL"
+                    IsClockVisible="False"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    PickerVisibility="HourMinute"
+                    SelectedTime="{Binding StartHour, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Godzina zakończenia:" />
+                <Controls:TimePicker
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Controls:TextBoxHelper.Watermark="Wybierz godzinę"
+                    Culture="pl-PL"
+                    IsClockVisible="False"
+                    IsEnabled="{Binding IsEndPeriodEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    PickerVisibility="HourMinute"
+                    SelectedTime="{Binding EndHour, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Grid>
+    </GroupBox>
+</UserControl>

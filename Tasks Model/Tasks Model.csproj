@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC1F9844-8D17-4DB4-9313-987DE8CE2AF5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tasks_Model</RootNamespace>
+    <AssemblyName>Tasks Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tasks Crypto">
+      <HintPath>..\Tasks Crypto\bin\Debug\Tasks Crypto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\Hibernate.cs" />
+    <Compile Include="DTO\PermissionDTO.cs" />
+    <Compile Include="DTO\TaskCommentCreationDTO.cs" />
+    <Compile Include="DTO\TaskCommentPrimaryDataDTO.cs" />
+    <Compile Include="DTO\TaskCreationDTO.cs" />
+    <Compile Include="DTO\TaskPrimaryDataDTO.cs" />
+    <Compile Include="DTO\TaskGenreDTO.cs" />
+    <Compile Include="DTO\TaskPriorityDTO.cs" />
+    <Compile Include="DTO\TaskStatusDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\UserPreferencesDTO.cs" />
+    <Compile Include="DTO\UserRoleDTO.cs" />
+    <Compile Include="DTO\UserSimpleDTO.cs" />
+    <Compile Include="DTO\UserStatusDTO.cs" />
+    <Compile Include="Entities\TaskComment.cs" />
+    <Compile Include="Entities\DatabaseInitialization.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Task.cs" />
+    <Compile Include="Entities\TaskGenre.cs" />
+    <Compile Include="Entities\TaskPriority.cs" />
+    <Compile Include="Entities\TaskStatus.cs" />
+    <Compile Include="Entities\UserPreference.cs" />
+    <Compile Include="Entities\UserStatus.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Interfaces\IAdministrationService.cs" />
+    <Compile Include="Interfaces\IDatabaseService.cs" />
+    <Compile Include="Interfaces\IPreferencesService.cs" />
+    <Compile Include="Interfaces\ITaskService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Mappings\TaskCommentMap.cs" />
+    <Compile Include="Mappings\DatabaseInitializationMap.cs" />
+    <Compile Include="Mappings\PermissionMap.cs" />
+    <Compile Include="Mappings\TaskGenreMap.cs" />
+    <Compile Include="Mappings\TaskMap.cs" />
+    <Compile Include="Mappings\TaskPriorityMap.cs" />
+    <Compile Include="Mappings\TaskStatusMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Mappings\UserPreferenceMap.cs" />
+    <Compile Include="Mappings\UserRoleMap.cs" />
+    <Compile Include="Mappings\UserStatusMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Searching\TaskSearchCriteria.cs" />
+    <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\PreferencesService.cs" />
+    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Services\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="docs\MySqlCommand.xml" />
+    <Content Include="docs\MySqlCommandBuilder.xml" />
+    <Content Include="docs\MySqlConnection.xml" />
+    <Content Include="docs\MySqlConnectionStringBuilder.xml" />
+    <Content Include="docs\MySqlDataAdapter.xml" />
+    <Content Include="docs\MySqlDataReader.xml" />
+    <Content Include="docs\MySqlException.xml" />
+    <Content Include="docs\MySqlHelper.xml" />
+    <Content Include="docs\MySqlParameter.xml" />
+    <Content Include="docs\MySqlParameterCollection.xml" />
+    <Content Include="docs\MySqlTransaction.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

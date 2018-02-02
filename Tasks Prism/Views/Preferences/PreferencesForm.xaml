@@ -1,0 +1,235 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Preferences.PreferencesForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    Height="350"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel>
+        <GroupBox Header="Preferencje">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <!--
+                    1.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Wyświetlaj tylko te zlecenia, w których biorę udział." />
+                <Controls:ToggleSwitch
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding DisplayOnlyTasksWithMyParticipation, UpdateSourceTrigger=PropertyChanged}"
+                    OffLabel="Nie"
+                    OffSwitchBrush="Gray"
+                    OnLabel="Tak"
+                    OnSwitchBrush="Green" />
+                <!--
+                    2.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Odświeżaj cyklicznie listę zleceń." />
+                <Controls:ToggleSwitch
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding EnableTasksListAutoRefreshing, UpdateSourceTrigger=PropertyChanged}"
+                    OffLabel="Nie"
+                    OffSwitchBrush="Gray"
+                    OnLabel="Tak"
+                    OnSwitchBrush="Green" />
+                <!--
+                    3.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Wyświetlaj pasek postępu odświeżania." />
+                <Controls:ToggleSwitch
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding DisplayTasksRefreshingProgressBar, UpdateSourceTrigger=PropertyChanged}"
+                    OffLabel="Nie"
+                    OffSwitchBrush="Gray"
+                    OnLabel="Tak"
+                    OnSwitchBrush="Green" />
+                <!--
+                    4.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Częstotliwość automatycznego odświeżania [sek]." />
+                <Controls:NumericUpDown
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    Interval="1"
+                    Maximum="3600"
+                    Minimum="60"
+                    Value="{Binding AutoRefreshingFrequency, UpdateSourceTrigger=PropertyChanged}" />
+                <!--
+                    5.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Ilość zleceń na jednej stronie." />
+                <Controls:NumericUpDown
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    Interval="1"
+                    Maximum="100"
+                    Minimum="10"
+                    Value="{Binding TasksPerPage, UpdateSourceTrigger=PropertyChanged}" />
+                <!--
+                    6.
+                -->
+                <icon:PackIconMaterial
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Kind="ArrowRight" />
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Ukrywaj zlecenia anulowane." />
+                <Controls:ToggleSwitch
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding HideCanceledTasks, UpdateSourceTrigger=PropertyChanged}"
+                    OffLabel="Nie"
+                    OffSwitchBrush="Gray"
+                    OnLabel="Tak"
+                    OnSwitchBrush="Green" />
+                <StackPanel
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <!--
+                        Reset settings
+                    -->
+                    <Button
+                        Margin="2"
+                        Command="{Binding Reset}"
+                        Content="Resetuj ustawienia" />
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <!--
+            Buttons
+        -->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="3"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button Margin="2" Command="{Binding SavePreferences}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Check" />
+                    <Label VerticalAlignment="Center" Content="ZAPISZ USTAWIENIA" />
+                </StackPanel>
+            </Button>
+            <Button Margin="2" Command="{Binding Close}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Close" />
+                    <Label VerticalAlignment="Center" Content="ZAMKNIJ" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

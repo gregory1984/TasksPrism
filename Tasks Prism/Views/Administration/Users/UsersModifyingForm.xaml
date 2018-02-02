@@ -1,0 +1,229 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Administration.Users.UsersModifyingForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel>
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="Brak uprawnień"
+            FontFamily="Segoe UI"
+            FontSize="24"
+            Foreground="Red"
+            Visibility="{Binding WarningVisibility, UpdateSourceTrigger=PropertyChanged}" />
+        <GroupBox Header="Modyfikowanie użytkownika" Visibility="{Binding FormVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--
+                    Left form
+                -->
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="Użytkownik:" />
+                    <ComboBox
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        FontSize="14"
+                        ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="Imię:" />
+                    <TextBox
+                        Margin="2"
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Controls:TextBoxHelper.SelectAllOnFocus="True"
+                        Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="Nazwisko:" />
+                    <TextBox
+                        Margin="2"
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Controls:TextBoxHelper.SelectAllOnFocus="True"
+                        Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="E-Mail:" />
+                    <TextBox
+                        Margin="2"
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Controls:TextBoxHelper.SelectAllOnFocus="True"
+                        Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding EMail, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="Telefon:" />
+                    <TextBox
+                        Margin="2"
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Controls:TextBoxHelper.SelectAllOnFocus="True"
+                        Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <!--
+                    Right form
+                -->
+                <DockPanel Grid.Row="0" Grid.Column="1">
+                    <StackPanel DockPanel.Dock="Top">
+                        <Label
+                            Margin="2"
+                            VerticalAlignment="Center"
+                            Content="Status:" />
+                        <ComboBox
+                            Margin="2"
+                            VerticalAlignment="Center"
+                            FontFamily="Segoe UI"
+                            FontSize="14"
+                            IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding UserStatuses, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedUserStatus, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label
+                            Margin="2"
+                            VerticalAlignment="Center"
+                            Content="Role:" />
+                    </StackPanel>
+                    <DataGrid
+                        Margin="2"
+                        AlternatingRowBackground="WhiteSmoke"
+                        AutoGenerateColumns="False"
+                        IsSynchronizedWithCurrentItem="True"
+                        ItemsSource="{Binding UserRoles, UpdateSourceTrigger=PropertyChanged}"
+                        RowBackground="White"
+                        ScrollViewer.CanContentScroll="False"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        SelectedItem="{Binding SelectedUserRole, UpdateSourceTrigger=PropertyChanged}"
+                        SelectionMode="Single">
+                        <!--
+                            Selected row style
+                        -->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <!--
+                            Columns
+                        -->
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn
+                                Width="auto"
+                                Header="Wybierz"
+                                SortMemberPath="IsChecked">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox
+                                            Margin="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                            IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn
+                                Width="*"
+                                Header="Rola"
+                                SortMemberPath="Name">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label
+                                            Margin="2"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+        <!--
+            Buttons
+        -->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="3"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Command="{Binding ResetPassword}"
+                Visibility="{Binding ResetPasswordButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="LockOpenOutline" />
+                    <Label VerticalAlignment="Center" Content="RESETUJ HASŁO" />
+                </StackPanel>
+            </Button>
+            <Button
+                Margin="2"
+                Command="{Binding ModifyUser}"
+                Visibility="{Binding ModifyUserButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Check" />
+                    <Label VerticalAlignment="Center" Content="ZMIEŃ" />
+                </StackPanel>
+            </Button>
+            <Button Margin="2" Command="{Binding Close}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Close" />
+                    <Label VerticalAlignment="Center" Content="ZAMKNIJ" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

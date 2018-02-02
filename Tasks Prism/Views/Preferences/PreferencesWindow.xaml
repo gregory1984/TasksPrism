@@ -1,0 +1,40 @@
+﻿<Controls:MetroWindow
+    x:Class="Tasks_Prism.Views.Preferences.PreferencesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:preferences="clr-namespace:Tasks_Prism.Views.Preferences"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding WindowTitle}"
+    Width="550"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ResizeMode="NoResize"
+    ShowIconOnTitleBar="False"
+    SizeToContent="Height"
+    WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--
+        Main grid
+    -->
+    <TabControl Controls:TabControlHelper.Underlined="TabPanel">
+        <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Preferencje">
+            <ContentControl>
+                <preferences:PreferencesForm />
+            </ContentControl>
+        </TabItem>
+        <TabItem Controls:ControlsHelper.HeaderFontSize="14" Header="Zmiana hasła">
+            <ContentControl>
+                <preferences:PasswordChangingForm />
+            </ContentControl>
+        </TabItem>
+    </TabControl>
+</Controls:MetroWindow>

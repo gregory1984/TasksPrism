@@ -1,0 +1,429 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Main.MainWindowTasksGrid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <GroupBox Header="Zlecenia">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <!--
+                Tasks
+            -->
+            <DataGrid
+                Grid.Row="0"
+                Grid.Column="0"
+                AlternatingRowBackground="WhiteSmoke"
+                AutoGenerateColumns="False"
+                Background="Transparent"
+                CanUserAddRows="False"
+                ItemsSource="{Binding Tasks, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                RowBackground="White"
+                ScrollViewer.CanContentScroll="True"
+                SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"
+                SelectionMode="Single"
+                VirtualizingPanel.ScrollUnit="Pixel">
+                <!--
+                    Selected row style
+                -->
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <!--
+                    Selected row details
+                -->
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <GroupBox Header="Szczegóły">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Button
+                                        Width="150"
+                                        Margin="2"
+                                        Command="{Binding ModityTask}"
+                                        Visibility="{Binding ModifyTaskButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconMaterialLight VerticalAlignment="Center" Kind="Magnify" />
+                                            <Label VerticalAlignment="Center" Content="{Binding ModifyTaskButtonLabel, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button
+                                        Width="150"
+                                        Margin="2"
+                                        Command="{Binding RemoveTask}"
+                                        Visibility="{Binding RemoveTaskButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconMaterialLight VerticalAlignment="Center" Kind="Delete" />
+                                            <Label VerticalAlignment="Center" Content="USUŃ" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <Border
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            VerticalAlignment="Center"
+                                            Content="Osoby zajmujące się zleceniem:"
+                                            FontWeight="SemiBold" />
+                                        <Label VerticalAlignment="Center" Content="{Binding Participants, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+                                </Border>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Button
+                                        Width="150"
+                                        Margin="2"
+                                        Command="{Binding RemoveTask}"
+                                        Visibility="{Binding RemoveTaskButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconMaterialLight VerticalAlignment="Center" Kind="Delete" />
+                                            <Label VerticalAlignment="Center" Content="USUŃ" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button
+                                        Width="150"
+                                        Margin="2"
+                                        Command="{Binding ModityTask}"
+                                        Visibility="{Binding ModifyTaskButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <icon:PackIconMaterialLight VerticalAlignment="Center" Kind="Magnify" />
+                                            <Label VerticalAlignment="Center" Content="{Binding ModifyTaskButtonLabel, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+                <!--
+                    Columns
+                -->
+                <DataGrid.Columns>
+                    <!--  Id  -->
+                    <DataGridTemplateColumn
+                        Width="auto"
+                        Header="Id"
+                        SortMemberPath="Id">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Width="50"
+                                    Height="50"
+                                    Background="{Binding IdBackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                                    BorderBrush="Green"
+                                    BorderThickness="1"
+                                    CornerRadius="50">
+                                    <Label
+                                        Margin="2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="{Binding Id}" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  Topic  -->
+                    <DataGridTemplateColumn
+                        Width="5*"
+                        Header="Treść"
+                        SortMemberPath="Content">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Content="Temat: "
+                                            FontWeight="SemiBold" />
+                                        <TextBlock
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Topic, UpdateSourceTrigger=PropertyChanged}"
+                                            TextWrapping="Wrap" />
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Content="Autor: "
+                                            FontWeight="SemiBold" />
+                                        <TextBlock
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}"
+                                            TextWrapping="Wrap" />
+                                    </WrapPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Content="Treść: "
+                                            FontWeight="SemiBold" />
+                                        <TextBlock
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
+                                            TextWrapping="Wrap" />
+                                    </WrapPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  StartPeriod  -->
+                    <DataGridTemplateColumn
+                        Width="*"
+                        Header="Rozp."
+                        SortMemberPath="StartPeriod">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            Content="Data: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding StartPeriod, UpdateSourceTrigger=PropertyChanged}"
+                                            ContentStringFormat="dd-MM-yyyy" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            Content="Godz: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding StartPeriod, UpdateSourceTrigger=PropertyChanged}"
+                                            ContentStringFormat="HH:mm" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  EndPeriod  -->
+                    <DataGridTemplateColumn
+                        Width="*"
+                        Header="Zak."
+                        SortMemberPath="EndPeriod">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            Content="Data: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding EndPeriod, UpdateSourceTrigger=PropertyChanged}"
+                                            ContentStringFormat="dd-MM-yyyy" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            Content="Godz: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding EndPeriod, UpdateSourceTrigger=PropertyChanged}"
+                                            ContentStringFormat="HH:mm" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  Last comment  -->
+                    <DataGridTemplateColumn
+                        Width="3*"
+                        Header="Ostatni komentarz"
+                        SortMemberPath="LastComment">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="Data: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding LastComment.Date, UpdateSourceTrigger=PropertyChanged}"
+                                            ContentStringFormat="dd-MM-yyyy (HH:mm)" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="Autor: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding LastComment.Author, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Content="Treść: "
+                                            FontWeight="SemiBold" />
+                                        <TextBlock
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding LastComment.Content, UpdateSourceTrigger=PropertyChanged}"
+                                            TextWrapping="Wrap" />
+                                    </WrapPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--  Properties  -->
+                    <DataGridTemplateColumn Width="*" Header="Cechy">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="Priorytet: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding Priority, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="Status: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="Rodzaj: "
+                                            FontWeight="SemiBold" />
+                                        <Label
+                                            Padding="1"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Content="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--
+                Pagination and progress bar
+            -->
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <StackPanel
+                    Name="PaginationStackPanel"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button Margin="2" Command="{Binding Pagination.FirstPage}">
+                        <icon:PackIconMaterial Kind="PageFirst" />
+                    </Button>
+                    <Button Margin="2" Command="{Binding Pagination.PreviousPage}">
+                        <icon:PackIconModern Kind="NavigatePrevious" />
+                    </Button>
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="{Binding Pagination.PageNo, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="/" />
+                    <Label
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Content="{Binding Pagination.PageCount, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Margin="2" Command="{Binding Pagination.NextPage}">
+                        <icon:PackIconModern Kind="NavigateNext" />
+                    </Button>
+                    <Button Margin="2" Command="{Binding Pagination.LastPage}">
+                        <icon:PackIconMaterial Kind="PageLast" />
+                    </Button>
+                </StackPanel>
+                <ProgressBar
+                    Width="{Binding ElementName=PaginationStackPanel, Path=Width}"
+                    Height="2"
+                    Maximum="{Binding ProgressBar.Max, UpdateSourceTrigger=PropertyChanged}"
+                    Minimum="{Binding ProgressBar.Min, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding ProgressBar.Visibility, UpdateSourceTrigger=PropertyChanged}"
+                    Value="{Binding ProgressBar.Progress, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Grid>
+    </GroupBox>
+</UserControl>

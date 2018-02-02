@@ -1,0 +1,132 @@
+﻿<Controls:MetroWindow
+    x:Class="Tasks_Prism.Views.Tasks.TaskCreationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:ctrl="clr-namespace:Tasks_Prism.Views.Tasks.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:main="clr-namespace:Tasks_Prism.Views.Main"
+    xmlns:prism="http://prismlibrary.com/"
+    Title="{Binding WindowTitle}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ShowIconOnTitleBar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <!--
+            Description
+        -->
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="{Binding Header}"
+            FontSize="16"
+            FontWeight="SemiBold" />
+        <!--
+            Dates
+        -->
+        <ContentControl Grid.Row="1" Grid.Column="0">
+            <ctrl:TaskDates />
+        </ContentControl>
+        <!--
+            Properties
+        -->
+        <ContentControl Grid.Row="2" Grid.Column="0">
+            <ctrl:TaskProperties />
+        </ContentControl>
+        <!--
+            Content
+        -->
+        <ContentControl Grid.Row="3" Grid.Column="0">
+            <ctrl:TaskContent />
+        </ContentControl>
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <!--
+                Participants
+            -->
+            <ContentControl Grid.Row="0">
+                <ctrl:TaskParticipants />
+            </ContentControl>
+            <!--
+                Comments
+            -->
+            <ContentControl Grid.Row="1">
+                <ctrl:TaskComments />
+            </ContentControl>
+        </Grid>
+
+        <!--
+            Buttons
+        -->
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="3"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Command="{Binding ProcessTask}"
+                Visibility="{Binding ProcessTaskButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Check" />
+                    <Label VerticalAlignment="Center" Content="ZAPISZ" />
+                </StackPanel>
+            </Button>
+            <Button Margin="2" Command="{Binding Close}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Close" />
+                    <Label VerticalAlignment="Center" Content="ZAMKNIJ" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+
+
+
+
+
+
+</Controls:MetroWindow>

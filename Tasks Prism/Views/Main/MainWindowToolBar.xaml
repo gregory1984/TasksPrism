@@ -1,0 +1,166 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Main.MainWindowToolBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <ToolBarTray Background="Transparent">
+        <!--
+            User management
+        -->
+        <ToolBar Background="Transparent">
+            <Button Command="{Binding ShowPreferencesWindow}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Settings" />
+                    <Label VerticalAlignment="Center" Content="Ustawienia" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding Logout}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Logout" />
+                    <Label VerticalAlignment="Center" Content="Wyloguj" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding QuitApplication}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="ExitToApp" />
+                    <Label VerticalAlignment="Center" Content="Wyjdź" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <!--
+            Admin management
+        -->
+        <ToolBar Background="Transparent" Visibility="{Binding AdminButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Button Command="{Binding ShowAdministrationWindow}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="ServerSecurity" />
+                    <Label VerticalAlignment="Center" Content="Administracja" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <!--
+            Tasks management
+        -->
+        <ToolBar Background="Transparent" Visibility="{Binding TaskAddingButtonVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <Button Command="{Binding NewTask}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="CalendarClock" />
+                    <Label VerticalAlignment="Center" Content="Nowe zlecenie" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <!--
+            Filters management
+        -->
+        <ToolBar Background="Transparent">
+            <Button Command="{Binding ShowMyTasks}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="AccountBoxOutline" />
+                    <Label VerticalAlignment="Center" Content="Mojego autorstwa" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowTasksWithMyActivity}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="AccountCheck" />
+                    <Label VerticalAlignment="Center" Content="Z moim udziałem" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <ToolBar Background="Transparent">
+            <Button Command="{Binding ShowTasks}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="CalendarToday" />
+                    <Label VerticalAlignment="Center" Content="Zlecenia" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowToners}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Printer" />
+                    <Label VerticalAlignment="Center" Content="Tonery" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowUpdates}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Update" />
+                    <Label VerticalAlignment="Center" Content="Aktualizacje" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowInstallations}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Server" />
+                    <Label VerticalAlignment="Center" Content="Instalacje" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <!--
+            About
+        -->
+        <ToolBar Background="Transparent">
+            <Button Command="{Binding ShowAboutWindow}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Kind="Information" />
+                    <Label VerticalAlignment="Center" Content="O programie" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+    </ToolBarTray>
+</UserControl>

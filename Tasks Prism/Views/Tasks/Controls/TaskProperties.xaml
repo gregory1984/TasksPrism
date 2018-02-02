@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Tasks.Controls.TaskProperties"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <GroupBox Header="Własności">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Priorytet:" />
+                <ComboBox
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding TaskPriorities, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedTaskPriority, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Status:" />
+                <ComboBox
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding TaskStatuses, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedTaskStatus, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Content="Rodzaj:" />
+                <ComboBox
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding TaskGenres, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedTaskGenre, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Grid>
+    </GroupBox>
+</UserControl>

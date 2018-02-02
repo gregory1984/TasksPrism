@@ -1,0 +1,112 @@
+﻿
+<Controls:MetroWindow
+    x:Class="Tasks_Prism.Views.About.AboutWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="500"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ResizeMode="NoResize"
+    SizeToContent="Height"
+    UseNoneWindowStyle="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <GroupBox Margin="10" Header="Zlecenia - informacje o systeme">
+        <StackPanel>
+            <!--
+                Main form
+            -->
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Right"
+                    Content="Wersja:"
+                    FontWeight="Bold" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalContentAlignment="Left"
+                    Content="{Binding VersionNumber}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Right"
+                    Content="Kompilacja:"
+                    FontWeight="Bold" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalContentAlignment="Left"
+                    Content="{Binding CompilationMarker}" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Right"
+                    Content="Technologia:"
+                    FontWeight="Bold" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalContentAlignment="Left"
+                    Content="{Binding Technologies}" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Right"
+                    Content="Autor:"
+                    FontWeight="Bold" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalContentAlignment="Left"
+                    Content="{Binding Author}" />
+            </Grid>
+            <!--
+                Close button
+            -->
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="2"
+                HorizontalAlignment="Right"
+                Command="{Binding Close}">
+                <StackPanel Orientation="Horizontal">
+                    <icon:PackIconMaterial
+                        Width="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Kind="Close" />
+                    <Label VerticalAlignment="Center" Content="ZAMKNIJ" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </GroupBox>
+</Controls:MetroWindow>

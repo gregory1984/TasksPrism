@@ -1,0 +1,106 @@
+﻿<UserControl
+    x:Class="Tasks_Prism.Views.Tasks.Controls.TaskParticipants"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontFamily="Segoe UI"
+    FontSize="14">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <GroupBox Header="Uczestnicy">
+        <DataGrid
+            Margin="2"
+            AlternatingRowBackground="WhiteSmoke"
+            AutoGenerateColumns="False"
+            IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding TaskParticipants, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+            RowBackground="White"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            SelectedItem="{Binding SelectedTaskParticipant, UpdateSourceTrigger=PropertyChanged}"
+            SelectionMode="Single"
+            VirtualizingPanel.ScrollUnit="Pixel">
+            <!--
+                Selected row style
+            -->
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <!--
+                Columns
+            -->
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Nazwa użytkownika"
+                    SortMemberPath="Username">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label
+                                Margin="2"
+                                VerticalAlignment="Center"
+                                Content="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Imię"
+                    SortMemberPath="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label
+                                Margin="2"
+                                VerticalAlignment="Center"
+                                Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Nazwisko"
+                    SortMemberPath="Surname">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label
+                                Margin="2"
+                                VerticalAlignment="Center"
+                                Content="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Wybierz"
+                    SortMemberPath="IsChecked">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Margin="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </GroupBox>
+</UserControl>
